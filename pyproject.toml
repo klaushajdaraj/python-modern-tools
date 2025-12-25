@@ -1,0 +1,9 @@
+[project]
+name = "python-modern-tools"
+version = "0.1.0"
+description = "A curated collection of modern tools and utilities for Python developers."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "ipykernel>=7.1.0",
+]
