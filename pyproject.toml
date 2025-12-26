@@ -3,7 +3,114 @@ name = "python-modern-tools"
 version = "0.1.0"
 description = "A curated collection of modern tools and utilities for Python developers."
 readme = "README.md"
+classifiers = [
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development",
+]
 requires-python = ">=3.12"
 dependencies = [
     "ipykernel>=7.1.0",
 ]
+
+[dependency-groups]
+dev = [
+    "mypy"
+]
+docs = [
+   "sphinx" 
+]
+
+# -------------------- BACKEND BUILD --------------------
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+# -------------------- UV PACKAGE MANAGER --------------------
+
+# [[tool.uv.index]]
+# url = <link-to-your-preferred-python-index>
+# default = true
+
+# [[tool.uv.pip]]
+# index-url = <link-to-your-preferred-python-index>
+# extra-index-url = [<link-to-your-additional-preferred-python-index>]
+
+# -------------------- RUFF --------------------
+
+# https://docs.astral.sh/ruff/configuration/
+required-version = ">=0.8.0"
+include = ["*.py"]
+extend-include = ["*.ipynb"] # enable linting and formatting Jupyter notebooks
+
+target-version = "py312"
+
+line-length = 120 # used for both linter and formatter
+indent-width = 4
+
+[tool.ruff.lint]
+select = [
+    "D",  # pydocstyle
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # flake8/Pyflakes
+    "B",  # 
+    "N",
+    "SIM",
+    "I",
+    "PL",
+    "UP",
+    "DOC",
+    "ANN",
+]
+ignore = [
+    "E203",
+    "D107",
+    "D212",
+    "PLR0913",
+]
+
+fixable = ["ALL"] # specifies which rules are fixable with flag --fix, "all" for all
+unfixable = [] # specifies which rules to exclude from automatic fix with flag --fix
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.isort]
+known-first-party = ["src"]
+force-wrap-aliases = true # https://docs.astral.sh/ruff/settings/#lint_isort_force-wrap-aliases
+combine-as-imports = true
+
+[tool.ruff.lint.pylint]
+max-locals = 25
+
+[tool.ruff.format]
+quote-style = "double" # use double quotes ""
+indent-style = "space" # use spaces to indent
+docstring-code-format = true # formats code in docstrings
+docstring-code-line-length = "dynamic" # dynami code length in docs based on context
+
+# -------------------- MYPY --------------------
+
+[tool.mypy]
+python_version = "3.12"
+check_untyped_defs = true
+disallow_untyped_defs = true
+warn_no_return = false
+follow_imports = "skip"
+
+[[tool.mypy.overrides]] # defines module-specific rules
+module = [
+    "numpy.*",
+]
+ignore_missing_imports = true
+
+# -------------------- PYTEST --------------------
+
+[tool.pytest.ini_options]
+minversion = "8.3"
+test_paths = ["tests"]
