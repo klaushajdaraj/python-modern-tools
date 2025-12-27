@@ -1,0 +1,7 @@
+name: Install uv
+description: GitHub Action to install the uv tool
+runs:
+    using: composite
+    steps:
+        - name: Install uv
+          run: pip install uv

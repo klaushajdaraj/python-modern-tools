@@ -1,0 +1,62 @@
+name: Code Checks
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+
+jobs:
+    lock_file:
+        runs-on: ubuntu-latest
+        name: Validate uv lockfile
+        steps:
+            - uses: actions/checkout@v4
+            - uses: ./.github/actions/setup
+            - run: uv lock --locked
+
+    linting:
+        runs-on: ubuntu-latest
+        name: Ruff lint check
+        needs: [lock_file]
+        steps:
+            - uses: actions/checkout@v4
+            - uses: ./.github/actions/setup
+            - run: uvx ruff check src/
+
+    formatting:
+        runs-on: ubuntu-latest
+        name: Ruff format check
+        needs: [lock_file]
+        steps:
+            - uses: actions/checkout@v4
+            - uses: ./.github/actions/setup
+            - run: uvx ruff format --check src/
+
+    types:
+        runs-on: ubuntu-latest
+        name: Type check with ty
+        needs: [lock_file]
+        steps:
+            - uses: actions/checkout@v4
+            - uses: ./.github/actions/setup
+            - run: uvx ty check src/
+
+    tests:
+        runs-on: ubuntu-latest
+        name: Run tests with pytest
+        needs: [lock_file]
+        steps:
+            - uses: actions/checkout@v4
+            - uses: ./.github/actions/setup
+            - run: uv run pytest tests -v
+
+    build:
+        runs-on: ubuntu-latest
+        name: Build distribution packages
+        needs: [linting, formatting, types, tests]
+        steps:
+            - uses: actions/checkout@v4
+            - uses: ./.github/actions/setup
+            - run: uv build --no-sources
