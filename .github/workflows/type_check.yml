@@ -10,4 +10,4 @@ jobs:
           python-version: "3.12"
       - run: pip install -e .
       - run: pip install uv
-      - run: uvx ty check src/ --python .venv
+      - run: uvx ty check src/
