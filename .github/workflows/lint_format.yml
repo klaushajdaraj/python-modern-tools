@@ -1,4 +1,4 @@
-name: Type Check
+name: Lint Check
 on: [push, pull_request]
 jobs:
   type-check:
@@ -18,5 +18,5 @@ jobs:
       - name: Install uv
         run: pip install uv
 
-      - name: Run type check
-        run: uvx ty check src/
+      - name: Run ruff check
+        run: uvx ruff check src/
