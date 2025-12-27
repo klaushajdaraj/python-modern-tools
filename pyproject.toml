@@ -114,3 +114,20 @@ ignore_missing_imports = true
 [tool.pytest.ini_options]
 minversion = "8.3"
 test_paths = ["tests"]
+
+# -------------------- TY --------------------
+
+[tool.ty.environment]
+python-version = "3.12"
+
+[tool.ty.src]
+exclude = ["**/tests/**", "**/docs/**"]
+
+[tool.ty.rules]
+unresolved-import = "ignore"
+# Note: check_untyped_defs is ty's default behavior
+# warn_redundant_casts equivalent: warnings are on by default
+# workaround for Pydantic projects:
+invalid-argument-type = "ignore"      # Pydantic model constructors
+invalid-key = "ignore"                # TypedDict/Pydantic interop
+invalid-parameter-default = "ignore"  # Field defaults
