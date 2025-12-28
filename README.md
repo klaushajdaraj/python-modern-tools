@@ -4,6 +4,22 @@
 
 A curated collection of modern tools and utilities for Data Science/AI developer using Python. This project aims to simplify packaging, testing, and development workflows with a focus on best practices and developer productivity.
 
+## Setup for developers
+
+### Sync and install project with `uv`
+
+```bash
+just install
+```
+
+### `just` commands
+
+```bash
+just lint <file-path> # lint, format & type check
+
+just tests # run pytest tests
+```
+
 ## AI & ML
 
 Libraries for AI/ML applications
