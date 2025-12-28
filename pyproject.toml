@@ -82,24 +82,24 @@ indent-width = 4
 
 [tool.ruff.lint]
 select = [
-    "D",  # pydocstyle
-    "E",  # pycodestyle errors
-    "W",  # pycodestyle warnings
-    "F",  # flake8/Pyflakes
-    "B",  # 
-    "N",
-    "SIM",
-    "I",
-    "PL",
-    "UP",
-    "DOC",
-    "ANN",
+    "D",    # pydocstyle
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # flake8/Pyflakes
+    "B",    # bandit
+    "N",    # naming conventions
+    "SIM",  # similarity checks
+    "I",    # isort
+    "PL",   # pylint
+    "UP",   # updates
+    "DOC",  # documentation
+    "ANN",  # annotations
 ]
 ignore = [
-    "E203",
-    "D107",
-    "D212",
-    "PLR0913",
+    "E203",     # whitespace before ':'
+    "D107",     # missing docstring in __init__
+    "D212",     # multi-line docstring summary
+    "PLR0913",  # too many arguments
 ]
 
 fixable = ["ALL"] # specifies which rules are fixable with flag --fix, "all" for all
