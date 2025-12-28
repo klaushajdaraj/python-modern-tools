@@ -18,3 +18,7 @@ lint PATH:
 tests:
     uv run pytest tests -v
     @echo "All tests passed!"
+
+build:
+    @echo "Building the project as a distributable package..."
+    uv build
