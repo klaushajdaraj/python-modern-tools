@@ -1276,6 +1276,7 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "ipykernel" },
+    { name = "pre-commit" },
 ]
 
 [package.dev-dependencies]
@@ -1293,7 +1294,10 @@ docs = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "ipykernel", specifier = ">=7.1.0" }]
+requires-dist = [
+    { name = "ipykernel", specifier = ">=7.1.0" },
+    { name = "pre-commit", specifier = ">=4.5.1" },
+]
 
 [package.metadata.requires-dev]
 dev = [
