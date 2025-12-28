@@ -1,9 +1,17 @@
 [project]
 name = "python-modern-tools"
 version = "0.1.0"
+authors = [
+    {name = "Klaus Hajdaraj", email = "klaus.hajdaraj1@gmail.com"}
+]
+maintainers = [
+    {name = "Klaus Hajdaraj", email = "klaus.hajdaraj1@gmail.com"}
+]
 description = "A curated collection of modern tools and utilities for Python developers."
 readme = "README.md"
 classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3.12",
     "Topic :: Software Development",
@@ -11,25 +19,43 @@ classifiers = [
 requires-python = ">=3.12"
 dependencies = [
     "ipykernel>=7.1.0",
-    "pytest>=9.0.2",
 ]
 
 [dependency-groups]
 dev = [
-    "mypy"
+    "bump-my-version>=1.2.5",
+    "hatch>=1.16.2",
+    "mypy>=1.19.1",
+    "pre-commit>=4.5.1",
+    "pytest>=9.0.2",
+    "ruff>=0.14.10",
 ]
 docs = [
-   "sphinx" 
+    "furo>=2025.12.19",
+    "sphinx>=9.0.4",
 ]
+
+[project.scripts]
+example = "data_processing.example_script:main"
 
 # -------------------- BACKEND BUILD --------------------
 
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
 
-[tool.hatch.build.targets.wheel]
-packages = ["src"]
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# [build-system]
+# requires = ["hatchling"]
+# build-backend = "hatchling.build"
+
+# [tool.hatch.build.targets.wheel]
+# packages = ["src"]
 
 # -------------------- UV PACKAGE MANAGER --------------------
 
@@ -43,6 +69,7 @@ packages = ["src"]
 
 # -------------------- RUFF --------------------
 
+[tool.ruff]
 # https://docs.astral.sh/ruff/configuration/
 required-version = ">=0.8.0"
 include = ["*.py"]
@@ -55,24 +82,24 @@ indent-width = 4
 
 [tool.ruff.lint]
 select = [
-    "D",  # pydocstyle
-    "E",  # pycodestyle errors
-    "W",  # pycodestyle warnings
-    "F",  # flake8/Pyflakes
-    "B",  # 
-    "N",
-    "SIM",
-    "I",
-    "PL",
-    "UP",
-    "DOC",
-    "ANN",
+    "D",    # pydocstyle
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # flake8/Pyflakes
+    "B",    # bandit
+    "N",    # naming conventions
+    "SIM",  # similarity checks
+    "I",    # isort
+    "PL",   # pylint
+    "UP",   # updates
+    "DOC",  # documentation
+    "ANN",  # annotations
 ]
 ignore = [
-    "E203",
-    "D107",
-    "D212",
-    "PLR0913",
+    "E203",     # whitespace before ':'
+    "D107",     # missing docstring in __init__
+    "D212",     # multi-line docstring summary
+    "PLR0913",  # too many arguments
 ]
 
 fixable = ["ALL"] # specifies which rules are fixable with flag --fix, "all" for all
@@ -93,7 +120,7 @@ max-locals = 25
 quote-style = "double" # use double quotes ""
 indent-style = "space" # use spaces to indent
 docstring-code-format = true # formats code in docstrings
-docstring-code-line-length = "dynamic" # dynami code length in docs based on context
+docstring-code-line-length = "dynamic" # dynamic code length in docs based on context
 
 # -------------------- MYPY --------------------
 
@@ -132,3 +159,26 @@ unresolved-import = "ignore"
 invalid-argument-type = "ignore"      # Pydantic model constructors
 invalid-key = "ignore"                # TypedDict/Pydantic interop
 invalid-parameter-default = "ignore"  # Field defaults
+
+# -------------------- BUMP-MY-VERSION --------------------
+[tool.bumpversion]
+current_version = "0.0.1"
+parse = "(?P<major>\\d+)\\.(?P<minor>\\d+)//.(?P<patch>\\d+)"
+serialize = ["{major}.{minor}.{patch}"]
+search = "{current_version}"
+replace = "{new_version}"
+regex = false
+ignore_missing_version = false
+tag = true
+sign_tags = false
+tag_name = "v{new_version}"
+tag_message = "Bump version: {current_version} → {new_version}"
+allow_dirty = false
+commit = true
+message = "Bump version: {current_version} → {new_version}"
+commit_args = ""
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = "version = \"{current_version}\""
+replace = "version = \"{new_version}\""
