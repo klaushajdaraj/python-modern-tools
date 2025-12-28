@@ -1,0 +1,27 @@
+files: ^src
+fail_fast: true
+repos:
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.9.18
+    hooks:
+      # Update the uv lockfile
+      - id: uv-lock
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0 
+    hooks:
+      - id: trailing-whitespace
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.0
+    hooks:
+      - id: ruff
+        args: [--fix]
+        files: \.py$
+        exclude: ^(tests).*$ 
+      - id: ruff-format
+        files: \.py$
+  - repo: local
+    hooks:
+      - id: ty
+        name: ty check
+        entry: uvx ty check src --ignore unresolved-import
+        language: python

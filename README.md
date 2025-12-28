@@ -20,6 +20,22 @@ just lint <file-path> # lint, format & type check
 just tests # run pytest tests
 ```
 
+### `pre-commit` commands
+
+```bash
+# Run hooks on all files
+pre-commit run --all-files
+
+# Run hooks only on staged files
+pre-commit run
+
+# Run a specific hook
+pre-commit run ruff --all-files
+
+# Commit without running hooks (use sparingly)
+git commit -m "WIP" --no-verify
+```
+
 ## AI & ML
 
 Libraries for AI/ML applications
