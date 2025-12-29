@@ -1,4 +1,4 @@
-"""Example script for data processing."""
+"""Example script using argparse CLI."""
 
 import argparse
 from collections.abc import Sequence
