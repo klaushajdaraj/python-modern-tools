@@ -15,9 +15,14 @@ just install
 ### `just` commands
 
 ```bash
-just lint <file-path> # lint, format & type check
+# Lint, format & type check
+just lint <file-path>
 
-just tests # run pytest tests
+# Run pytest tests
+just tests
+
+# Build the project as a distributable package
+just build
 ```
 
 ### `pre-commit` commands
