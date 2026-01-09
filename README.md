@@ -41,6 +41,12 @@ pre-commit run ruff --all-files
 git commit -m "WIP" --no-verify
 ```
 
+### How to run the `FastAPI` example
+
+```bash
+uv run uvicorn src.utilities.create_api_example:app --reload 
+```
+
 ## AI & ML
 
 Libraries for AI/ML applications

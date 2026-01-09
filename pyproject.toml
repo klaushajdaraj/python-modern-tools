@@ -19,12 +19,14 @@ classifiers = [
 requires-python = ">=3.12"
 dependencies = [
     "duckdb>=1.4.3",
+    "fastapi>=0.128.0",
     "ipykernel>=7.1.0",
     "pandas>=2.3.3",
     "polars>=1.36.1",
     "pre-commit>=4.5.1",
     "pyarrow>=22.0.0",
     "sqlalchemy>=2.0.45",
+    "uvicorn>=0.40.0",
 ]
 
 [dependency-groups]
