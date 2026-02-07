@@ -1,6 +1,6 @@
 # python-modern-tools
 
-> **Note:** This project is a work in progress. Not all tools have been added yet, and the list will continue to grow as the project evolves.
+> ⚠️ **Note:** This project is a work in progress. Not all tools have been added yet, and the list will continue to grow as the project evolves.
 
 A curated collection of modern tools and utilities for Data Science/AI developers using Python. This project aims to simplify packaging, testing, and development workflows with a focus on best practices and developer productivity.
 
