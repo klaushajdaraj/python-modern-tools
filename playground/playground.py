@@ -1,0 +1,212 @@
+import marimo
+
+__generated_with = "0.19.7"
+app = marimo.App(width="wide")
+
+
+@app.cell
+def _():
+    import marimo as mo
+
+    return (mo,)
+
+
+@app.cell
+def _(mo):
+    mo.md("""
+    # 🐚 Marimo Playground
+    Reactive notebook stored in a single `.py` file
+    """)
+    return
+
+
+@app.cell
+def _():
+    import sys
+    from pathlib import Path
+
+    sys.path.append(str(Path(__file__).resolve().parent.parent / "src"))
+    return
+
+
+@app.cell
+def _():
+    from python_modern_tools.example import hello
+
+    return (hello,)
+
+
+@app.cell
+def _(hello):
+    hello("Playground")
+    return
+
+
+@app.cell
+def _():
+    import duckdb
+    import random
+    import polars as pl
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+
+    random.seed(0)  # reproducible results
+    plt.rcParams["figure.figsize"] = (6, 3)
+    return duckdb, pl, plt, random, sns
+
+
+@app.cell
+def _(mo):
+    n_samples = mo.ui.slider(100, 5000, step=100, value=1000, label="Samples")
+    mu = mo.ui.number(value=0.0, label="Mean")
+    sigma = mo.ui.slider(0.1, 5.0, step=0.1, value=1.0, label="Std dev")
+
+    mo.hstack([n_samples, mu, sigma])
+    return mu, n_samples, sigma
+
+
+@app.cell
+def _(mu, n_samples, pl, random, sigma):
+    data = [random.gauss(mu.value, sigma.value) for _ in range(n_samples.value)]
+    df = pl.DataFrame({"value": data})
+    return (df,)
+
+
+@app.cell
+def _(df):
+    df.head()
+    return
+
+
+@app.cell
+def _(df, duckdb):
+    duckdb.sql(
+        """
+        SELECT
+            COUNT(*) AS rows,
+            AVG(value) AS mean,
+            STDDEV_SAMP(value) AS std_dev,
+            MIN(value) AS min_value,
+            QUANTILE_CONT(value, 0.5) AS median,
+            MAX(value) AS max_value
+        FROM df
+        """
+    ).pl()
+    return
+
+
+@app.cell
+def _(df, plt, sns):
+    _, ax = plt.subplots()
+    sns.histplot(df["value"].to_list(), bins=30, ax=ax)
+    ax.set_title("Generated distribution")
+    ax.set_xlabel("x")
+    ax.set_ylabel("count")
+    return
+
+
+@app.cell
+def _(df):
+    print("Mean", f"{df['value'].mean():.2f}")
+    print("Std dev", f"{df['value'].std():.2f}")
+    print("Rows", f"{df.height:,}")
+    return
+
+
+@app.cell
+def _(pl):
+    sales_df = pl.DataFrame(
+        {
+            "region": [
+                "North",
+                "North",
+                "North",
+                "South",
+                "South",
+                "South",
+                "East",
+                "East",
+                "West",
+                "West",
+                "West",
+                "West",
+            ],
+            "category": [
+                "Hardware",
+                "Software",
+                "Hardware",
+                "Software",
+                "Services",
+                "Hardware",
+                "Services",
+                "Hardware",
+                "Software",
+                "Services",
+                "Hardware",
+                "Software",
+            ],
+            "units": [12, 18, 9, 14, 6, 11, 10, 15, 20, 5, 13, 16],
+            "revenue": [
+                2400,
+                5400,
+                1800,
+                4900,
+                2100,
+                2200,
+                3500,
+                3000,
+                6200,
+                1750,
+                2600,
+                5100,
+            ],
+            "month": [
+                "Jan",
+                "Jan",
+                "Feb",
+                "Jan",
+                "Feb",
+                "Feb",
+                "Jan",
+                "Feb",
+                "Jan",
+                "Jan",
+                "Feb",
+                "Feb",
+            ],
+        }
+    )
+    sales_df
+    return (sales_df,)
+
+
+@app.cell
+def _(pl, sales_df):
+    (
+        sales_df.group_by(["region", "category"])
+        .agg(
+            pl.len().alias("orders"),
+            pl.col("units").sum().alias("total_units"),
+            pl.col("revenue").sum().alias("total_revenue"),
+            pl.col("revenue").mean().round(2).alias("avg_revenue"),
+        )
+        .with_columns(
+            (pl.col("total_revenue") / pl.col("total_units"))
+            .round(2)
+            .alias("revenue_per_unit"),
+            pl.col("total_revenue")
+            .rank("dense", descending=True)
+            .over("region")
+            .alias("rank_in_region"),
+        )
+        .filter(pl.col("rank_in_region") <= 2)
+        .sort(
+            ["region", "rank_in_region", "total_revenue"],
+            descending=[False, False, True],
+        )
+    )
+    return
+
+
+if __name__ == "__main__":
+    app.run()

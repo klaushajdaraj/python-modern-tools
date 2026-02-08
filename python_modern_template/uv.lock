@@ -1145,15 +1145,6 @@ wheels = [
 ]
 
 [[package]]
-name = "justfile"
-version = "0.0.1a0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/9f/22/db3cd9161dd2a773f8fc5c975410c7dd5531e68788574a056d852de28104/justfile-0.0.1a0.tar.gz", hash = "sha256:0f12000a1da84585402daff428fb842854d81574b923cb130af875f46ce43b4a", size = 3330, upload-time = "2020-06-30T01:19:49.123Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/fe/2c/2b851b151f210b894c9a32f237e8badb58d70ac895294b4a1ddc78c517db/justfile-0.0.1a0-py2.py3-none-any.whl", hash = "sha256:75ba63146bf24029696e31ee04d58dbbacf5443b27e895c69973e9bfd1f17a92", size = 3712, upload-time = "2020-06-30T01:19:45.895Z" },
-]
-
-[[package]]
 name = "keyring"
 version = "25.7.0"
 source = { registry = "https://pypi.org/simple" }
@@ -2444,7 +2435,6 @@ dependencies = [
     { name = "duckdb" },
     { name = "fastapi" },
     { name = "ipykernel" },
-    { name = "justfile" },
     { name = "pandas" },
     { name = "polars" },
     { name = "pre-commit" },
@@ -2488,7 +2478,6 @@ requires-dist = [
     { name = "duckdb", specifier = ">=1.4.3" },
     { name = "fastapi", specifier = ">=0.128.0" },
     { name = "ipykernel", specifier = ">=7.1.0" },
-    { name = "justfile", specifier = ">=0.0.1a0" },
     { name = "pandas", specifier = ">=2.3.3" },
     { name = "polars", specifier = ">=1.36.1" },
     { name = "pre-commit", specifier = ">=4.5.1" },

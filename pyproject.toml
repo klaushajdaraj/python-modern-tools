@@ -1,0 +1,236 @@
+[project]
+name = "python-modern-tools"
+version = "0.1.0"
+authors = [
+    {name = "Klaus Hajdaraj", email = "klaus.hajdaraj1@gmail.com"}
+]
+maintainers = [
+    {name = "Klaus Hajdaraj", email = "klaus.hajdaraj1@gmail.com"}
+]
+description = "A curated collection of modern tools and utilities for Python developers."
+readme = { file = "README.md", content-type = "text/markdown" }
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development",
+]
+requires-python = ">=3.12"
+dependencies = [
+    "duckdb>=1.4.3",
+    "fastapi>=0.128.0",
+    "ipykernel>=7.1.0",
+    "justfile>=0.0.1a0",
+    "pandas>=2.3.3",
+    "polars>=1.36.1",
+    "pre-commit>=4.5.1",
+    "pyarrow>=22.0.0",
+    "sqlalchemy>=2.0.45",
+    "uvicorn>=0.40.0",
+]
+
+[dependency-groups]
+dev = [
+    "bump-my-version>=1.2.5",
+    "hatch>=1.16.2",
+    "mypy>=1.19.1",
+    "pre-commit>=4.5.1",
+    "pytest>=9.0.2",
+    "ruff>=0.14.10",
+    "commitizen==4.13.0",
+    "importlib-metadata==8.7.1",
+    "pre-commit==4.5.1",
+    "pytest-cov==7.0.0",
+    "pytest==9.0.2",
+    "ruff==0.14.14",
+    "typing-extensions==4.15.0",
+    "marimo==0.19.7",
+    "polars==1.37.1",
+    "seaborn==0.13.2",
+    "ty==0.0.14",
+]
+docs = [
+    "furo>=2025.12.19",
+    "sphinx>=9.0.4",
+    "mike==2.1.3",
+    "mkdocs-autorefs==1.4.3",
+    "mkdocs-gen-files==0.6.0",
+    "mkdocs-literate-nav==0.6.2",
+    "mkdocs-material==9.7.1",
+    "mkdocs-section-index==0.3.10",
+    "mkdocstrings[python]==1.0.2",
+    "pymdown-extensions==10.20.1",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/klaushajdaraj/python-modern-tools"
+"Source" = "https://github.com/klaushajdaraj/python-modern-tools"
+
+[project.scripts]
+example = "python_modern_tools.utilities.cli_example_script:main"
+
+# -------------------- BACKEND BUILD --------------------
+
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# [build-system]
+# requires = ["hatchling"]
+# build-backend = "hatchling.build"
+
+# [tool.hatch.build.targets.wheel]
+# packages = ["src"]
+
+# -------------------- UV PACKAGE MANAGER --------------------
+
+# [[tool.uv.index]]
+# url = <link-to-your-preferred-python-index>
+# default = true
+
+# [[tool.uv.pip]]
+# index-url = <link-to-your-preferred-python-index>
+# extra-index-url = [<link-to-your-additional-preferred-python-index>]
+
+[tool.uv]
+required-version = ">=0.8.0"
+native-tls = true # Use the system TLS library
+
+# -------------------- RUFF --------------------
+
+[tool.ruff]
+# https://docs.astral.sh/ruff/configuration/
+required-version = ">=0.8.0"
+include = ["*.py"]
+extend-include = ["*.ipynb"] # enable linting and formatting Jupyter notebooks
+respect-gitignore = true
+extend-exclude = ["justfile", "tests"]
+
+target-version = "py313"
+
+line-length = 120 # used for both linter and formatter
+indent-width = 4
+
+[tool.ruff.lint]
+select = [
+    "D",    # pydocstyle
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # flake8/Pyflakes
+    "B",    # bandit
+    "N",    # naming conventions
+    "SIM",  # similarity checks
+    "I",    # isort
+    "PL",   # pylint
+    "UP",   # updates
+    "DOC",  # documentation
+    "ANN",  # annotations
+]
+ignore = [
+    "E203",     # whitespace before ':'
+    "D107",     # missing docstring in __init__
+    "D212",     # multi-line docstring summary
+    "PLR0913",  # too many arguments
+]
+
+fixable = ["ALL"] # specifies which rules are fixable with flag --fix, "all" for all
+unfixable = [] # specifies which rules to exclude from automatic fix with flag --fix
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.isort]
+known-first-party = ["src"]
+force-wrap-aliases = true # https://docs.astral.sh/ruff/settings/#lint_isort_force-wrap-aliases
+combine-as-imports = true
+
+[tool.ruff.lint.pylint]
+max-locals = 25
+
+[tool.ruff.format]
+quote-style = "double" # use double quotes ""
+indent-style = "space" # use spaces to indent
+docstring-code-format = true # formats code in docstrings
+docstring-code-line-length = "dynamic" # dynamic code length in docs based on context
+
+# -------------------- MYPY --------------------
+
+[tool.mypy]
+python_version = "3.12"
+check_untyped_defs = true
+disallow_untyped_defs = true
+warn_no_return = false
+follow_imports = "skip"
+
+[[tool.mypy.overrides]] # defines module-specific rules
+module = [
+    "numpy.*",
+]
+ignore_missing_imports = true
+
+# -------------------- PYTEST --------------------
+
+[tool.pytest.ini_options]
+minversion = "8.3"
+test_paths = ["tests"]
+addopts = [
+    "--cov=src/",
+    "--cov-report=xml",
+    "--cov-report=term-missing",
+    "--junitxml=report.xml",
+]
+# https://stackoverflow.com/a/50610630
+pythonpath = [
+  ".",
+  "src"
+]
+
+# -------------------- TY --------------------
+
+[tool.ty.environment]
+python-version = "3.12"
+
+[tool.ty.src]
+exclude = ["**/tests/**", "**/docs/**"]
+
+[tool.ty.rules]
+unresolved-import = "ignore"
+# Note: check_untyped_defs is ty's default behavior
+# warn_redundant_casts equivalent: warnings are on by default
+# workaround for Pydantic projects:
+invalid-argument-type = "ignore"      # Pydantic model constructors
+invalid-key = "ignore"                # TypedDict/Pydantic interop
+invalid-parameter-default = "ignore"  # Field defaults
+
+# -------------------- COMMITIZEN --------------------
+
+[tool.commitizen]
+version_provider = "uv"
+
+# -------------------- BUMP-MY-VERSION --------------------
+
+[tool.bumpversion]
+current_version = "0.1.0"
+commit = true
+tag = true
+tag_name = "v{new_version}"
+allow_dirty = false
+message = "Bump version: {current_version} → {new_version}"
+pre_commit_hooks = ["uv sync", "git add uv.lock"]
+commit_args = ""
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = 'version = "{current_version}"'
+replace = 'version = "{new_version}"'
+
+[tool.bumpversion.scripts]
+post_bump = "uv lock"
+
