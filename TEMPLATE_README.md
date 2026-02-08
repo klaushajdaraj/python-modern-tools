@@ -41,15 +41,15 @@ After publishing, the documentation will be available at `https://klaushajdaraj.
 
 ## `justfile` commands
 
-- `build` — Build the project as a package.
-- `install` — Runs `uv sync` to synch & install the project.
-- `lint` — Formatting and linting with `ruff`.
-- `init-docs` — Runs `scripts/init-docs.sh` to initialize documentation branch.
-- `github-pages` — Runs `scripts/github-pages.sh` to publish documentation to GitHub Pages.
-- `github-tag` — Runs `scripts/github-tag.sh` to create a GitHub tag.
-- `print-version` — Runs `scripts/print-version.sh` to print the current version.
-- `tests` — Runs `scripts/tests.sh` to execute tests.
-- `docker-build` — Runs `scripts/docker-build.sh` to build the Docker image.
+- `just build` — Build the project as a package.
+- `just install` — Runs `uv sync` to synch & install the project.
+- `just lint` — Formatting and linting with `ruff`.
+- `just init-docs` — Runs `scripts/init-docs.sh` to initialize documentation branch.
+- `just github-pages` — Runs `scripts/github-pages.sh` to publish documentation to GitHub Pages.
+- `just github-tag` — Runs `scripts/github-tag.sh` to create a GitHub tag.
+- `just print-version` — Runs `scripts/print-version.sh` to print the current version.
+- `just tests` — Runs `scripts/tests.sh` to execute tests.
+- `just docker-build` — Runs `scripts/docker-build.sh` to build the Docker image.
 
 ## Marimo playground
 
