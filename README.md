@@ -5,7 +5,7 @@
 
 A curated collection of modern tools and utilities for Data Scientists/AI developers using Python. This project aims to simplify packaging, testing, and development workflows with a focus on best practices and developer productivity.
 
-## How to use the project as a template
+## How to use the `python-modern-template` in your project
 
 ### 1. Create a new project folder
 
