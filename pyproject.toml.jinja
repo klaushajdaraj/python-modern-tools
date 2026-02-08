@@ -1,11 +1,11 @@
 [project]
-name = "python-modern-tools"
+name = "{{ project_slug }}"
 version = "0.1.0"
 authors = [
-    {name = "Klaus Hajdaraj", email = "klaus.hajdaraj1@gmail.com"}
+    {name = "{{ author_name }}", email = "{{ author_email }}"}
 ]
 maintainers = [
-    {name = "Klaus Hajdaraj", email = "klaus.hajdaraj1@gmail.com"}
+    {name = "{{ author_name }}", email = "{{ author_email }}"}
 ]
 description = "A curated collection of modern tools and utilities for Python developers."
 readme = { file = "README.md", content-type = "text/markdown" }
@@ -63,11 +63,11 @@ docs = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/{{github_username}}/{{project_slug}}"
-"Source" = "https://github.com/{{github_username}}/{{project_slug}}"
+"Homepage" = "https://github.com/{{ github_username }}/{{ project_slug }}"
+"Source" = "https://github.com/{{ github_username }}/{{ project_slug }}"
 
 [project.scripts]
-example = "data_processing.example_script:main"
+example = "{{ package_name }}.example_script:main"
 
 # -------------------- BACKEND BUILD --------------------
 

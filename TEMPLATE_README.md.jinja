@@ -1,0 +1,62 @@
+# {{project_slug}}
+
+[![Copier](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/copier-org/copier/master/img/badge/badge-grayscale-inverted-border-orange.json)](https://github.com/copier-org/copier)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
+
+## Installation
+
+### 1. Install `uv` as described in `README.md`
+
+### 2. Clone the repo
+
+```bash
+git clone https://github.com/{{ github_username }}/{{project_slug}}
+cd {{project_slug}}
+```
+
+### 3. Sync the project
+
+```bash
+just install
+```
+
+Congratulations! You're now ready to use your new project :sparkles:
+
+## Documentation
+
+The project documentation is generated automatically by parsing the source code, provided that the code is properly commented with appropriate docstrings.
+
+To initialize the documentation, run:
+```bash
+just init-docs
+```
+
+To publish the generated documentation to GitHub Pages, run:
+
+```bash
+just github-pages
+```
+
+After publishing, the documentation will be available at `https://{{ github_username }}.github.io/{{project_slug}}/`.
+
+## `justfile` commands
+
+- `build` — Build the project as a package.
+- `install` — Runs `uv sync` to synch & install the project.
+- `lint` — Formatting and linting with `ruff`.
+- `init-docs` — Runs `scripts/init-docs.sh` to initialize documentation branch.
+- `github-pages` — Runs `scripts/github-pages.sh` to publish documentation to GitHub Pages.
+- `github-tag` — Runs `scripts/github-tag.sh` to create a GitHub tag.
+- `print-version` — Runs `scripts/print-version.sh` to print the current version.
+- `tests` — Runs `scripts/tests.sh` to execute tests.
+- `docker-build` — Runs `scripts/docker-build.sh` to build the Docker image.
+
+## Marimo playground
+
+The Marimo notebook can be run locally using the following command:
+
+```bash
+uv run marimo edit
+```
+
+This opens the Marimo editor for interactive notebook development.

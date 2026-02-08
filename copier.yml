@@ -1,3 +1,5 @@
+_templates_suffix: .jinja
+
 package_name:
     type: str
     placeholder: YOUR-PROJECT-NAME
@@ -16,7 +18,17 @@ project_slug_underscore:
 project_description:
     type: str
     help: Description of the project.
-    default: "A python project"
+    default: "A modern python project"
+
+author_name:
+    type: str
+    help: Name of the author.
+    default: "Your Name"
+
+author_email:
+    type: str
+    help: Email of the author.
+    default: "your.email@example.com"
 
 github_username:
     type: str

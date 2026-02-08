@@ -48,7 +48,9 @@ np.random.seed(42)
 n_rows = 5_000_000
 
 data = {
-    "category": np.random.choice(["Electronics", "Clothing", "Food", "Books"], size=n_rows),
+    "category": np.random.choice(
+        ["Electronics", "Clothing", "Food", "Books"], size=n_rows
+    ),
     "region": np.random.choice(["North", "South", "East", "West"], size=n_rows),
     "amount": np.random.rand(n_rows) * 1000,
     "quantity": np.random.randint(1, 100, size=n_rows),
@@ -98,7 +100,12 @@ polars_df, polars_load_time = load_with_polars()
 
 @time_it
 def pandas_query():
-    return pd.read_csv("../../data/sales_data.csv").query("amount > 100").groupby("category")["amount"].mean()
+    return (
+        pd.read_csv("../../data/sales_data.csv")
+        .query("amount > 100")
+        .groupby("category")["amount"]
+        .mean()
+    )
 
 
 @time_it
@@ -207,7 +214,10 @@ orders_pd = pd.DataFrame(
 )
 
 customers_pd = pd.DataFrame(
-    {"customer_id": range(100_000), "region": np.random.choice(["North", "South", "East", "West"], size=100_000)}
+    {
+        "customer_id": range(100_000),
+        "region": np.random.choice(["North", "South", "East", "West"], size=100_000),
+    }
 )
 
 orders_pl = pl.from_pandas(orders_pd)
@@ -296,3 +306,6 @@ enriched = aggregated.with_columns(
 # Step 3: Convert to pandas for visualization or ML
 final_df = enriched.to_pandas()
 print(final_df.head())
+
+if __name__ == "__main__":
+    pass
