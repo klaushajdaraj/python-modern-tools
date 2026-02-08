@@ -1711,11 +1711,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/57/32/407a9a5fdd7d8ecb4af8d830b9bcdf47ea68f916869b3f44bac31f081250/mkdocstrings-1.0.2-py3-none-any.whl", hash = "sha256:41897815a8026c3634fe5d51472c3a569f92ded0ad8c7a640550873eea3b6817", size = 35443, upload-time = "2026-01-24T15:57:23.933Z" },
 ]
 
-[package.optional-dependencies]
-python = [
-    { name = "mkdocstrings-python" },
-]
-
 [[package]]
 name = "mkdocstrings-python"
 version = "2.0.1"
@@ -2446,6 +2441,13 @@ dependencies = [
     { name = "ipykernel" },
     { name = "justfile" },
     { name = "mike" },
+    { name = "mkdocs-autorefs" },
+    { name = "mkdocs-gen-files" },
+    { name = "mkdocs-literate-nav" },
+    { name = "mkdocs-material" },
+    { name = "mkdocs-section-index" },
+    { name = "mkdocstrings" },
+    { name = "mkdocstrings-python" },
     { name = "pandas" },
     { name = "polars" },
     { name = "pre-commit" },
@@ -2473,14 +2475,6 @@ dev = [
 ]
 docs = [
     { name = "furo" },
-    { name = "mike" },
-    { name = "mkdocs-autorefs" },
-    { name = "mkdocs-gen-files" },
-    { name = "mkdocs-literate-nav" },
-    { name = "mkdocs-material" },
-    { name = "mkdocs-section-index" },
-    { name = "mkdocstrings", extra = ["python"] },
-    { name = "pymdown-extensions" },
     { name = "sphinx" },
 ]
 
@@ -2491,6 +2485,13 @@ requires-dist = [
     { name = "ipykernel", specifier = ">=7.1.0" },
     { name = "justfile", specifier = ">=0.0.1a0" },
     { name = "mike", specifier = ">=2.1.3" },
+    { name = "mkdocs-autorefs", specifier = ">=1.4.3" },
+    { name = "mkdocs-gen-files", specifier = ">=0.6.0" },
+    { name = "mkdocs-literate-nav", specifier = ">=0.6.2" },
+    { name = "mkdocs-material", specifier = ">=9.7.1" },
+    { name = "mkdocs-section-index", specifier = ">=0.3.10" },
+    { name = "mkdocstrings", specifier = ">=1.0.2" },
+    { name = "mkdocstrings-python", specifier = ">=2.0.1" },
     { name = "pandas", specifier = ">=2.3.3" },
     { name = "polars", specifier = ">=1.36.1" },
     { name = "pre-commit", specifier = ">=4.5.1" },
@@ -2521,14 +2522,6 @@ dev = [
 ]
 docs = [
     { name = "furo", specifier = ">=2025.12.19" },
-    { name = "mike", specifier = "==2.1.3" },
-    { name = "mkdocs-autorefs", specifier = "==1.4.3" },
-    { name = "mkdocs-gen-files", specifier = "==0.6.0" },
-    { name = "mkdocs-literate-nav", specifier = "==0.6.2" },
-    { name = "mkdocs-material", specifier = "==9.7.1" },
-    { name = "mkdocs-section-index", specifier = "==0.3.10" },
-    { name = "mkdocstrings", extras = ["python"], specifier = "==1.0.2" },
-    { name = "pymdown-extensions", specifier = "==10.20.1" },
     { name = "sphinx", specifier = ">=9.0.4" },
 ]
 
