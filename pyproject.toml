@@ -22,6 +22,7 @@ dependencies = [
     "fastapi>=0.128.0",
     "ipykernel>=7.1.0",
     "justfile>=0.0.1a0",
+    "mike>=2.1.3",
     "pandas>=2.3.3",
     "polars>=1.36.1",
     "pre-commit>=4.5.1",
