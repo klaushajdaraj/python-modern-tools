@@ -27,7 +27,7 @@ tests:
 print-version: chmod
     @./scripts/print-version.sh
 
-init-docs:
+init-docs: chmod
     set -ex
     uv sync
     @./scripts/init-docs.sh
