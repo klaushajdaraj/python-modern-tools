@@ -44,7 +44,7 @@ git commit -m "WIP" --no-verify
 ### How to run the `FastAPI` example
 
 ```bash
-uv run uvicorn src.utilities.create_api_example:app --reload 
+uv run uvicorn python_modern_tools.utilities.create_api_example:app --reload 
 ```
 
 ## AI & ML
