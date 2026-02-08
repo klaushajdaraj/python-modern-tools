@@ -1,8 +1,62 @@
 # python-modern-tools
 
+> [!IMPORTANT]
 > ⚠️ **Note:** This project is a work in progress. Not all tools have been added yet, and the list will continue to grow as the project evolves.
 
-A curated collection of modern tools and utilities for Data Science/AI developers using Python. This project aims to simplify packaging, testing, and development workflows with a focus on best practices and developer productivity.
+A curated collection of modern tools and utilities for Data Scientists/AI developers using Python. This project aims to simplify packaging, testing, and development workflows with a focus on best practices and developer productivity.
+
+## How to use the project as a template
+
+### 1. Create a new project folder
+
+```bash
+mkdir -p <project_name>
+cd <project_name>
+```
+
+### 2. Install [`uv`](https://github.com/astral-sh/uv)
+
+Follow instructions [here](https://docs.astral.sh/uv/getting-started/installation/); install the latest version from `uv` [github releases](https://github.com/astral-sh/uv/releases).
+
+If you have already installed `uv`, insure you're using the latest version:
+
+```bash
+uv self update
+```
+
+### 3. Create the project
+
+Answer the carefully to the prompted questions:
+
+```
+uvx copier copy https://github.com/klaushajdaraj/python-modern-tools.git .
+```
+
+> [!IMPORTANT]
+> `Copier` generates a `.copier-answers.yml` file. Commit the file and **never** change it manually.
+
+### 4. Push the project into the repo
+
+```bash
+git init --initial-branch=main
+just install
+git add .
+git commit -m "feat: first commit"
+git remote add origin <remote_repository_URL>
+git push --set-upstream origin main
+```
+
+### 5. Update an existing project
+
+1. Move inside your project and make sure that there are no local changes (in case you have local changes, commit or stash them).
+
+2. Update your project to the latest Git tag of the template with the following command:
+
+```bash
+uvx copier update --defaults
+```
+
+3. Resolve any conflicts and commit the changes.
 
 ## Setup for developers
 
@@ -26,6 +80,8 @@ just build
 ```
 
 ### `pre-commit` commands
+
+Pre-commit hooks run automatically everytime you add your commits: `git commit -m "commit message"`. However, you can still run them manually:
 
 ```bash
 # Run hooks on all files
